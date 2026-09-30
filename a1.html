@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>專心小超人｜認識 ADHD</title>
+<style>
+:root{
+  --ink:#24324a; --muted:#61708a; --paper:#fffdf8; --sky:#dff4ff;
+  --blue:#4f8cff; --purple:#8b6ee8; --yellow:#ffd85e; --pink:#ff8fb3;
+  --green:#61c795; --orange:#ff9b55; --shadow:0 12px 30px rgba(52,72,110,.13);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; font-family:"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+  color:var(--ink); background:
+  radial-gradient(circle at 10% 10%,#fff 0 80px,transparent 81px),
+  linear-gradient(135deg,#edf8ff,#fff8ef); min-height:100vh;
+}
+button{font:inherit;border:0;cursor:pointer}
+.app{max-width:1180px;margin:auto;padding:22px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:52px;height:52px;border-radius:17px;background:#fff;box-shadow:var(--shadow);display:grid;place-items:center;font-size:28px}
+h1{font-size:25px;margin:0} .subtitle{font-size:13px;color:var(--muted)}
+.progress{height:10px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:inset 0 1px 4px #dce4ef}
+.progress span{display:block;height:100%;width:25%;background:linear-gradient(90deg,var(--blue),var(--purple));transition:.5s}
+.stage{background:rgba(255,255,255,.8);border:1px solid #fff;border-radius:30px;box-shadow:var(--shadow);padding:24px;min-height:690px}
+.scene{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:stretch}
+.story{background:var(--paper);border-radius:25px;padding:25px;position:relative;overflow:hidden}
+.story:before{content:"";position:absolute;width:180px;height:180px;background:#fff0b5;border-radius:50%;right:-65px;top:-60px;opacity:.7}
+.badge{display:inline-flex;padding:7px 12px;border-radius:99px;background:#e9f3ff;color:#3567b7;font-weight:800;font-size:13px}
+h2{font-size:34px;line-height:1.25;margin:16px 0 10px}
+p{line-height:1.8;font-size:17px}.tip{background:#f3f0ff;border-left:5px solid var(--purple);padding:13px 15px;border-radius:12px;font-size:15px}
+.character-area{position:relative;min-height:360px;background:linear-gradient(#bdeaff,#eefbff 65%,#bde5a0 65%);border-radius:25px;overflow:hidden}
+.sun{position:absolute;right:30px;top:25px;width:75px;height:75px;border-radius:50%;background:#ffd85e;box-shadow:0 0 0 12px rgba(255,216,94,.18)}
+.cloud{position:absolute;background:#fff;border-radius:50px;width:110px;height:35px;top:60px;left:35px;opacity:.85}.cloud:before,.cloud:after{content:"";position:absolute;background:#fff;border-radius:50%}.cloud:before{width:50px;height:50px;left:18px;top:-22px}.cloud:after{width:65px;height:65px;right:12px;top:-32px}
+.desk{position:absolute;bottom:56px;left:50%;transform:translateX(-50%);width:210px;height:18px;background:#b87955;border-radius:8px}.desk:after{content:"";position:absolute;left:22px;top:18px;width:18px;height:75px;background:#9e6547;box-shadow:145px 0 #9e6547}
+.person{position:absolute;left:50%;bottom:70px;transform:translateX(-50%);width:120px;height:220px;transition:.5s}
+.head{width:78px;height:78px;border-radius:50%;background:#ffd0a8;border:5px solid #704f46;position:absolute;left:21px;top:0;z-index:2}
+.hair{position:absolute;width:82px;height:42px;left:19px;top:-3px;background:#513c36;border-radius:45px 45px 18px 18px;z-index:3}
+.eye{position:absolute;width:7px;height:7px;background:#24324a;border-radius:50%;top:35px;left:20px;box-shadow:32px 0 #24324a}.mouth{position:absolute;width:24px;height:10px;border-bottom:3px solid #9b5260;border-radius:50%;top:53px;left:25px}
+.body{position:absolute;top:72px;left:13px;width:94px;height:120px;border-radius:30px 30px 18px 18px;background:#6f86e8;border:5px solid #4d5ea8}
+.arm{position:absolute;width:68px;height:18px;background:#ffd0a8;border:5px solid #704f46;border-radius:20px;top:92px;z-index:1;transition:.5s}.arm.l{left:-37px;transform:rotate(22deg)}.arm.r{right:-37px;transform:rotate(-22deg)}
+.leg{position:absolute;width:22px;height:65px;background:#4e536d;top:180px;border-radius:10px}.leg.l{left:32px}.leg.r{right:32px}
+.person.bouncy{animation:bounce .55s infinite alternate}.person.bouncy .arm.l{transform:rotate(-38deg)}.person.bouncy .arm.r{transform:rotate(38deg)}
+.person.focus .head{box-shadow:0 0 0 10px rgba(97,199,149,.25)}
+@keyframes bounce{to{transform:translateX(-50%) translateY(-17px) rotate(2deg)}}
+@keyframes wiggle{0%,100%{transform:translateX(-50%)}50%{transform:translateX(-50%) rotate(-3deg)}}
+.caption{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:#fff;padding:8px 14px;border-radius:99px;font-weight:800;box-shadow:0 5px 15px #7892a233;white-space:nowrap}
+.controls{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.btn{padding:11px 16px;border-radius:14px;background:#fff;box-shadow:0 5px 12px #42557a1a;color:var(--ink);font-weight:800}
+.btn.primary{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff}
+.btn.good{background:#e9fff5;color:#287c5a}.btn.warn{background:#fff4e9;color:#9b5a24}
+.right-card{background:#fff;border-radius:25px;padding:22px;box-shadow:var(--shadow)}
+.right-card h3{margin:0 0 14px;font-size:21px}
+.choices{display:grid;gap:12px}.choice{padding:15px;border:2px solid #e9edf5;background:#fff;border-radius:16px;text-align:left;transition:.2s}.choice:hover{transform:translateY(-2px);border-color:#a8c4ff}.choice.correct{border-color:var(--green);background:#edfff7}.choice.wrong{border-color:var(--pink);background:#fff1f5}
+.feedback{min-height:46px;margin-top:12px;padding:10px 13px;border-radius:12px;background:#f6f8fc;color:var(--muted);font-size:14px}
+.meter{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:16px 0}.meter div{padding:12px;border-radius:15px;text-align:center;background:#f7f9fd}.meter b{display:block;font-size:22px}.meter small{color:var(--muted)}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:20px}.dots{display:flex;gap:6px}.dot{width:10px;height:10px;border-radius:50%;background:#d7dfed}.dot.on{background:var(--blue);width:28px;border-radius:8px}
+.quiz{display:none}.quiz.show{display:block}
+.lesson{display:none}.lesson.show{display:block}
+.finish{display:none;text-align:center;padding:55px 20px}.finish.show{display:block}
+.star{font-size:65px;animation:float 1.5s ease-in-out infinite alternate}@keyframes float{to{transform:translateY(-10px) rotate(5deg)}}
+@media(max-width:820px){.scene{grid-template-columns:1fr}.stage{padding:15px}h2{font-size:28px}.character-area{min-height:330px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand"><div class="logo">🧠</div><div><h1>專心小超人：認識 ADHD</h1><div class="subtitle">四年級互動學習動畫｜每個人的大腦都不一樣</div></div></div>
+    <div style="width:180px"><div class="subtitle" style="text-align:right;margin-bottom:5px">學習進度</div><div class="progress"><span id="bar"></span></div></div>
+  </div>
+
+  <main class="stage">
+    <section class="lesson show" id="s1">
+      <div class="scene">
+        <div class="story">
+          <span class="badge">故事 1／4</span>
+          <h2>這不是「故意不專心」</h2>
+          <p>今天是小宇的數學課。老師正在說明題目，小宇的腦袋卻像同時收到好多個通知。</p>
+          <div class="tip">💡 ADHD 是注意力不足過動症。它可能讓一個人在「維持注意力、控制衝動或活動量」上比較需要支持。</div>
+          <p>這不代表一個人懶惰、笨，或故意搗蛋。適合的環境和方法，可以幫助他學習。</p>
+          <div class="controls"><button class="btn primary" onclick="animate('bouncy')">▶ 看看小宇的腦袋</button><button class="btn" onclick="animate('focus')">✨ 給他一個專心工具</button></div>
+        </div>
+        <div class="character-area">
+          <div class="sun"></div><div class="cloud"></div>
+          <div class="person" id="person"><div class="hair"></div><div class="head"><span class="eye"></span><span class="mouth"></span></div><div class="arm l"></div><div class="arm r"></div><div class="body"></div><div class="leg l"></div><div class="leg r"></div></div>
+          <div class="desk"></div><div class="caption" id="caption">小宇正在上數學課</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson" id="s2">
+      <div class="scene">
+        <div class="story">
+          <span class="badge">故事 2／4</span>
+          <h2>注意力像一台會轉台的收音機</h2>
+          <p>有時候，小宇會突然注意到窗外的鳥、同學的聲音，或腦中剛想到的事情。</p>
+          <p>但「有 ADHD」不等於「完全不能專心」。當事情有興趣、環境合適，或有清楚的任務步驟時，也可能很投入。</p>
+          <div class="meter"><div><b>👀</b><small>注意力</small></div><div><b>⚡</b><small>活動量</small></div><div><b>🛑</b><small>抑制衝動</small></div></div>
+          <div class="controls"><button class="btn primary" onclick="showMsg('把任務切成小步驟，可以讓目標更清楚！')">🧩 切小任務</button><button class="btn good" onclick="showMsg('短暫休息、活動身體，也可能幫助重新準備學習。')">🏃 動一動</button></div>
+        </div>
+        <div class="right-card">
+          <h3>🎛️ 小宇的「專心工具箱」</h3>
+          <div class="choices">
+            <button class="choice" onclick="tool(this,'把「完成數學作業」變成「先做第1～3題」')">🧩 把大任務拆成小任務</button>
+            <button class="choice" onclick="tool(this,'減少桌面上的物品，讓眼睛少一些干擾。')">🧹 整理桌面，減少干擾</button>
+            <button class="choice" onclick="tool(this,'用計時器安排短時間學習，再搭配短暫休息。')">⏱️ 用計時器安排學習與休息</button>
+          </div>
+          <div class="feedback" id="toolFeedback">點一個工具，看看它能怎麼幫忙。</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson" id="s3">
+      <div class="scene">
+        <div class="story">
+          <span class="badge">故事 3／4</span>
+          <h2>如果我是同學，我可以怎麼做？</h2>
+          <p>小宇不小心插話、忘記帶東西時，同學可以選擇理解和提醒，而不是取笑。</p>
+          <p>支持不是「幫他做完所有事情」，而是一起找出更適合的方法。</p>
+          <div class="tip">🌱 小提醒：每個人的需求不同。最重要的是尊重、溝通，也不要替別人貼標籤。</div>
+        </div>
+        <div class="right-card quiz show">
+          <h3>🎯 情境小挑戰</h3>
+          <p>小宇正在寫作業，突然一直玩橡皮擦。你會怎麼做？</p>
+          <div class="choices">
+            <button class="choice" onclick="answer(this,false)">A. 大聲說：「你怎麼又不專心！」</button>
+            <button class="choice" onclick="answer(this,true)">B. 溫和提醒：「我們先完成這一題，要不要一起開始？」</button>
+            <button class="choice" onclick="answer(this,false)">C. 直接把他的作業全部寫完</button>
+          </div>
+          <div class="feedback" id="quizFeedback">選一個答案，想想哪種做法比較能提供尊重的支持。</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson" id="s4">
+      <div class="scene">
+        <div class="story">
+          <span class="badge">故事 4／4</span>
+          <h2>記住：先理解，再幫忙</h2>
+          <p>ADHD 是一種神經發展狀況。每個人的表現和需要都可能不同。</p>
+          <div class="tip">❤️ 我們可以做的事：<br>① 不嘲笑、不貼標籤　② 清楚、簡短地溝通　③ 把任務分小段　④ 給適當的休息與活動　⑤ 問問對方「什麼方法對你有幫助？」</div>
+          <div class="controls"><button class="btn primary" onclick="finish()">🌟 完成學習</button></div>
+        </div>
+        <div class="right-card">
+          <h3>🧠 你學會了哪些事？</h3>
+          <div class="meter"><div><b>🔎</b><small>理解差異</small></div><div><b>🤝</b><small>尊重同學</small></div><div><b>🧩</b><small>找方法</small></div></div>
+          <p>小宇需要的不是「被責備得更用力」，而是合適的支持與策略。</p>
+          <button class="btn good" onclick="alert('你已經完成「專心小超人」！記得：每個人的大腦都值得被理解。')">🎉 我記住了</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="finish" id="finish">
+      <div class="star">🌟</div>
+      <h2>你完成了「專心小超人」！</h2>
+      <p>真正的超能力，不是要求每個人都一樣，而是知道每個人可以用不同的方法學習。</p>
+      <button class="btn primary" onclick="restart()">↻ 再玩一次</button>
+    </section>
+
+    <div class="nav">
+      <button class="btn" id="prev" onclick="move(-1)">← 上一步</button>
+      <div class="dots"><span class="dot on"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      <button class="btn primary" id="next" onclick="move(1)">下一關 →</button>
+    </div>
+  </main>
+</div>
+
+<script>
+let page=0;
+const lessons=[...document.querySelectorAll('.lesson')];
+const dots=[...document.querySelectorAll('.dot')];
+const person=document.getElementById('person');
+const caption=document.getElementById('caption');
+
+function update(){
+  lessons.forEach((x,i)=>x.classList.toggle('show',i===page));
+  dots.forEach((d,i)=>d.classList.toggle('on',i===page));
+  document.getElementById('bar').style.width=((page+1)/4*100)+'%';
+  document.getElementById('prev').disabled=page===0;
+  document.getElementById('next').textContent=page===3?'完成 →':'下一關 →';
+}
+function move(n){
+  if(page===3 && n>0){finish();return}
+  page=Math.max(0,Math.min(3,page+n)); update();
+}
+function animate(type){
+  person.classList.remove('bouncy','focus'); void person.offsetWidth;
+  person.classList.add(type);
+  if(type==='bouncy') caption.textContent='好多聲音一起進來，腦袋正在快速轉台！';
+  else caption.textContent='✨ 使用專心工具：讓目標更清楚！';
+}
+function showMsg(msg){
+  caption.textContent=msg;
+  person.classList.remove('bouncy'); person.classList.add('focus');
+}
+function tool(el,msg){
+  document.querySelectorAll('.choice').forEach(x=>x.classList.remove('correct'));
+  el.classList.add('correct');
+  document.getElementById('toolFeedback').textContent='💡 '+msg;
+}
+function answer(el,ok){
+  document.querySelectorAll('#s3 .choice').forEach(x=>x.classList.remove('correct','wrong'));
+  el.classList.add(ok?'correct':'wrong');
+  document.getElementById('quizFeedback').textContent=ok
+    ?'🌟 很棒！溫和、具體的提醒，可以提供支持，也保留對方自己完成的機會。'
+    :'再想想：我們可以支持對方，但也要尊重他自己完成事情的能力。';
+}
+function finish(){
+  lessons.forEach(x=>x.classList.remove('show'));
+  document.getElementById('finish').classList.add('show');
+  document.querySelector('.nav').style.display='none';
+  document.getElementById('bar').style.width='100%';
+}
+function restart(){
+  document.getElementById('finish').classList.remove('show');
+  document.querySelector('.nav').style.display='flex';
+  page=0; update();
+}
+update();
+</script>
+</body>
+</html>
